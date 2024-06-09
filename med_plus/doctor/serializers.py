@@ -13,19 +13,21 @@ from rest_framework import serializers
 class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserProfile
-        fields = "__all__"
+        fields = ("first_name", "last_name", "bio")
 
 
 class DoctorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Doctor
-        fields = "__all__"
+        fields = ("specialty", "education", "hospital")
+        
 
 
 class MedicalRecordSerializer(serializers.ModelSerializer):
     class Meta:
         model = MedicalRecord
-        fields = "__all__"
+        fields = ("record_type", "description")
+        
 
 
 class AppointmentSerializer(serializers.ModelSerializer):

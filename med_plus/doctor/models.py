@@ -20,9 +20,6 @@ class UserProfile(models.Model):
         verbose_name="Date of Birth",
     )
 
-    def __str__(self) -> str:
-        return self.first_name
-
 
 class Doctor(models.Model):
     user = models.ForeignKey(UserProfile, verbose_name="User", on_delete=models.CASCADE)
@@ -40,9 +37,6 @@ class Doctor(models.Model):
         max_length=255, blank=True, null=True, verbose_name="Hospital"
     )
 
-    def __str__(self) -> str:
-        return self.user.first_name
-
 
 class MedicalRecord(models.Model):
     user = models.ForeignKey(UserProfile, verbose_name="User", on_delete=models.CASCADE)
@@ -53,18 +47,12 @@ class MedicalRecord(models.Model):
     date = models.DateField(verbose_name="Date")
     doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
 
-    def __str__(self) -> str:
-        return self.user.first_name
-
 
 class Appointment(models.Model):
     user = models.ForeignKey(UserProfile, verbose_name="User", on_delete=models.CASCADE)
     doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
     date = models.DateField(verbose_name="Date")
     reason = models.CharField(max_length=255, verbose_name="Reason")
-
-    def __str__(self) -> str:
-        return self.user.first_name
 
 
 class Medication(models.Model):
@@ -75,23 +63,14 @@ class Medication(models.Model):
         models.CharField(max_length=20), size=7, verbose_name="Schedule"
     )
 
-    def __str__(self) -> str:
-        return self.name
-
 
 class FitnessProgram(models.Model):
     user = models.ForeignKey(UserProfile, verbose_name="User", on_delete=models.CASCADE)
     name = models.CharField(max_length=255, verbose_name="Name")
     description = models.TextField(verbose_name="Description")
 
-    def __str__(self) -> str:
-        return self.name
-
 
 class Notification(models.Model):
     user = models.ForeignKey(UserProfile, verbose_name="User", on_delete=models.CASCADE)
     message = models.TextField(verbose_name="Message")
     created_at = models.DateField(auto_now_add=True, verbose_name="Created at")
-
-    def __str__(self) -> str:
-        return self.user.first_name

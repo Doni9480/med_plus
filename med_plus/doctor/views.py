@@ -7,6 +7,7 @@ from .models import (
     FitnessProgram,
     Notification,
 )
+from django_filters.rest_framework import DjangoFilterBackend
 from .serializers import (
     UserProfileSerializer,
     DoctorSerializer,
@@ -29,8 +30,8 @@ class UserProfileViewSet(viewsets.ModelViewSet):
 class DoctorViewSet(viewsets.ModelViewSet):
     queryset = Doctor.objects.all()
     serializer_class = DoctorSerializer
-    
-    filter_class = DoctorFilter
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['education', 'hospital', 'specialty']
     
 
 
